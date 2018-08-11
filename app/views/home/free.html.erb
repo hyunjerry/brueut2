@@ -1,0 +1,36 @@
+<body>
+  <% @freeposts.each do |freepost|%>
+
+    <div style="border: 3px solid; margin-bottom: 10px;">
+      Title: <%= freepost.title %> <br>
+      ID: <%= freepost.username %> <br>
+      Content: <%= freepost.content %> <br>
+      Time: <%= freepost.created_at %> <br>
+
+      <div style="border: 1px solid red; margin-bottom: 10px;">
+        <% freepost.freecomments.each do |fcomment| %>
+          ID: <%= fcomment.username %> <br>
+          Content: <%= fcomment.content %> <br>
+        <% end %>
+
+      </div>
+
+      <form action= "/freecomment" method="POST">
+        <input type = "hidden" name="freepost_id" value="<%= freepost.id%>">
+        ID: <input type="integer" name="username">
+        Content: <input type="text" name="content">
+        <input type = "submit" value="Send">
+      </form>
+    </div>
+  <% end %>
+
+  <form action = "/freepost" method="POST">
+    Title: <input type="string" name="title">
+    ID: <input type="integer" name="username">
+    Content: <input type="text" name="content">
+
+    <input type = "submit" value="Send">
+  </form>
+
+
+</body>
