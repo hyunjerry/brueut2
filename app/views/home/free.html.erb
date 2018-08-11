@@ -32,5 +32,13 @@
     <input type = "submit" value="Send">
   </form>
 
+  <br>
 
+  <% if current_user %>
+
+  <% else %>
+
+    <a class="nav-link" href="/auth/google_oauth2"><i class="fab fa-google-plus-g"></i> Sign in</a>
+
+   <% end %>
 </body>
