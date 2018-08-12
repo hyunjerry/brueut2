@@ -2,7 +2,8 @@
 <h1>This is freenew page</h1><br>
   <form action = "/freepost" method="POST">
     Title: <input type="string" name="title">
-    ID: <input type="integer" name="username">
+    ID: <%= current_user.uid %>
+    <input type="hidden" name="username" value="<%= current_user.uid %>">
     Content: <input type="text" name="content">
 
     <input type = "submit" value="Send">

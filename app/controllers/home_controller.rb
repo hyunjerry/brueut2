@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
   def free
     @freeposts = Freepost.all
+
+    @current_user = current_user
   end
 
   def freepost #action that creates freepsot
@@ -20,6 +22,8 @@ class HomeController < ApplicationController
 
   def freeshow #view for specific freepost
     @freepost = Freepost.find(params[:freepost_id])
+    @current_user = current_user
+
   end
 
   def freedestroy #action for deleting specific freepost
@@ -54,31 +58,31 @@ class HomeController < ApplicationController
   end
 
   def freelike #action for creating new like
-    fl = Freelike.new
-    fl.user = current_user
-    fl.freepost_id = param[:freepost_id]
-    fl.save
-    redirect_to "/home/free"
+    @fl = Freelike.new
+    @fl.user_id = current_user.id
+    @fl.freepost_id = params[:freepost_id]
+    @fl.save
+    redirect_to "/freeshow/#{@fl.freepost_id}"
   end
 
   def freeunlike #action for deleting existing like
-    fl = Freelike.find(params[:freepost_id])
-    fl.delete
-    redirect_to "/home/free"
+    @fl = Freelike.find(params[:freepost_id])
+    @fl.delete
+    redirect_to "/freeshow/#{@fl.freepost_id}"
   end
 
   def freedislike #action for creating new dislike
     fd = Freedislike.new
-    fd.user = current_user
-    fd.freepost_id = param[:freepost_id]
+    fd.user_id = current_user.id
+    fd.freepost_id = params[:freepost_id]
     fd.save
-    redirect_to "/home/free"
+    redirect_to "/freeshow/#{fd.freepost_id}"
   end
 
   def freeundislike #action for deleting existing dislike
-    fd = Freedislike.find(params[:freepost_id])
+    fd = Freedislike.freepost.find(params[:freepost_id])
     fd.delete
-    redirect_to "/home/free"
+    redirect_to "/freeshow/#{fd.freepost_id}"
   end
 
 end

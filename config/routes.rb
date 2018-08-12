@@ -15,11 +15,11 @@ Rails.application.routes.draw do
   post '/freeupdate/:freepost_id' => 'home#freeupdate'
   get '/freeedit/:freepost_id' => 'home#freeedit'
 
-  post 'freelike/:freepost_id' => "post#freelike"
-  post 'freeunlike/:freepost_id' => "post#freeunlike"
+  post 'freelike/:freepost_id' => "home#freelike"
+  post 'freeunlike/:freepost_id' => "home#freeunlike"
 
-  post 'freedislike/:freepost_id' => "post#freedislike"
-  post 'freeundislike/:freepost_id' => "post#freeundislike"
+  post 'freedislike/:freepost_id' => "home#freedislike"
+  post 'freeundislike/:freepost_id' => "home#freeundislike"
 
   #google sign in
   get 'login', to: redirect('/auth/google_oauth2'), as: 'login'

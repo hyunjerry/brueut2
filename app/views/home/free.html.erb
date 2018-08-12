@@ -1,6 +1,16 @@
 <body>
 
-  
+  <%= current_user.id%>
+
+  <form action = "/freepost" method="POST">
+    Title: <input type="string" name="title">
+    ID: <%= current_user.uid %>
+    <input type="hidden" name="username" value="<%= current_user.uid %>">
+    Content: <input type="text" name="content">
+
+    <input type = "submit" value="Send">
+  </form>
+
 
   <% @freeposts.each do |freepost|%>
 
@@ -18,16 +28,15 @@
       <% end %>
 
       <br>
-      <!--  -->
-        <a href = "/freelike/<%= freepost.id %>"  data-method = 'POST'>LIKE (<%=freepost.freelikes.count%>)</a>
-        <br>
-        <a href = "/freedislike/<%= freepost.id %>"  data-method = 'POST'>DISLIKE (<%=freepost.freedislikes.count%>)</a>
-        <br>
-      <!--  -->
+      <h1><a href = "/freelike/<%= freepost.id %>"  data-method = 'post'>LIKE (<%=freepost.freelikes.count%>)</a></h1>
+      <br>
+      <h1><a href = "/freedislike/<%= freepost.id %>"  data-method = 'post'>DISLIKE (<%=freepost.freedislikes.count%>)</a></h1>
+      <br>
 
       <form action= "/freecomment" method="POST">
         <input type = "hidden" name="freepost_id" value="<%= freepost.id%>">
-        ID: <input type="integer" name="username">
+        ID: <%= current_user.uid %>
+        <input type="hidden" name="username" value="<%= current_user.uid %>">
         Content: <input type="text" name="content">
         <input type = "submit" value="Send">
       </form>

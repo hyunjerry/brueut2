@@ -1,12 +1,43 @@
 <body>
-  
-    <h2> Title : <%= @freepost.title %> - <%= @freepost.username  %> </h2> <br>
-    <h3> Content : <%= @freepost.content %> </h3>
+
+  <h2> Title : <%= @freepost.title %> - <%= @freepost.username  %> </h2> <br>
+  <h3> Content : <%= @freepost.content %> </h3>
+
+  <% @freepost.freecomments.each do |fcomment| %>
+    <div style="border: 1px solid red; margin-bottom: 10px;">
+      ID: <%= fcomment.username %> <br>
+      Content: <%= fcomment.content %> <br>
+    </div>
+  <% end %>
+
+  <br><br>
+  <h1>user uid<%= @current_user.uid %></h1>
+  <h1>freepost id <%= @freepost.id %></h1>
+
+  <% if Freelike.where(:user_id => @current_user.id).where(:freepost_id => @freepost.id).empty? %>
+
+    <a href = "/freelike/<%= @freepost.id %>" data-method = 'POST'>LIKE (<%= @freepost.freelikes.count%>)</a><br>
+  <% else %>
+    <a href = "/freeunlike/<%= @freepost.id %>" data-method = 'POST'>UNLIKE (<%= @freepost.freelikes.count%>)</a><br>
+  <% end %>
+
+  <% if Freedislike.where(:user_id => @current_user.id).where(:freepost_id => @freepost.id).empty? %>
+    <a href = "/freedislike/<%= @freepost.id %>" data-method = 'POST'>DISLIKE (<%= @freepost.freedislikes.count%>)</a> <br>
+  <% else %>
+    <a href = "/freeundislike/<%= @freepost.id %>" data-method = 'POST'>UNDISLIKE (<%= @freepost.freedislikes.count%>)</a><br>
+  <% end %>
+
+  <form action= "/freecomment" method="POST">
+    <input type = "hidden" name="freepost_id" value="<%= @freepost.id%>">
+    ID: <%= @current_user.uid %>
+    <input type="hidden" name="username" value="<%= @current_user.uid %>">
+    Content: <input type="text" name="content">
+    <input type = "submit" value="Send">
+  </form>
 
 
-
-    <br><br><br><br>
-    <h1><a href="/freeedit/<%= @freepost.id%>">Edit Post</a></h1>
-    <h1><a href="/freedestroy/<%= @freepost.id%>" data-confirm="Are you sure?" data-method = 'POST'>Delete Post</a></h1>
-    <h1><a href="/freeindex">Return to Index</a></h1>
+  <br><br><br><br>
+  <h1><a href="/freeedit/<%= @freepost.id%>">Edit Post</a></h1>
+  <h1><a href="/freedestroy/<%= @freepost.id%>" data-confirm="Are you sure?" data-method = 'POST'>Delete Post</a></h1>
+  <h1><a href="/freeindex">Return to Index</a></h1>
 </body>
