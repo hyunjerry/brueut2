@@ -1,0 +1,13 @@
+<body>
+
+<h3><a href = "/freenew">Write a new post</a></h3>
+
+
+  <% @freeposts.each do |fpost| %>
+    <h3><a href = "/freeshow/<%= fpost.id %>"> <%=fpost.id%>: <%=fpost.title%> </a></h3>
+  <%end%>
+
+
+
+
+</body>

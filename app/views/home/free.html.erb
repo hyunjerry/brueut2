@@ -1,4 +1,7 @@
 <body>
+
+  
+
   <% @freeposts.each do |freepost|%>
 
     <div style="border: 3px solid; margin-bottom: 10px;">
@@ -16,9 +19,9 @@
 
       <br>
       <!--  -->
-        <a href = "/freelike/<%= freepost.id %>">LIKE (<%=freepost.freelikes.count%>)</a>
+        <a href = "/freelike/<%= freepost.id %>"  data-method = 'POST'>LIKE (<%=freepost.freelikes.count%>)</a>
         <br>
-        <a href = "/freedislike/<%= freepost.id %>">DISLIKE (<%=freepost.freedislikes.count%>)</a>
+        <a href = "/freedislike/<%= freepost.id %>"  data-method = 'POST'>DISLIKE (<%=freepost.freedislikes.count%>)</a>
         <br>
       <!--  -->
 
@@ -32,13 +35,13 @@
     </div>
   <% end %>
 
-  <form action = "/freepost" method="POST">
-    Title: <input type="string" name="title">
-    ID: <input type="integer" name="username">
-    Content: <input type="text" name="content">
-
-    <input type = "submit" value="Send">
-  </form>
 
 
+  <% if current_user %>
+
+  <% else %>
+
+    <a class="nav-link" href="/auth/google_oauth2"><i class="fab fa-google-plus-g"></i> Sign in</a>
+
+   <% end %>
 </body>

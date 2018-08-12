@@ -1,0 +1,14 @@
+<body>
+<h1>Updating Post <%= @freepost.id%> </h1><br>
+  <form action = "/freeupdate/<%= @freepost.id %>" method="POST">
+    <p>Title: <input type="string" name="title" value="<%= @freepost.title%>"></p>
+    <p>ID: <input type="integer" name="username" value="<%= @freepost.username%>"></p>
+    <p>Content: <input type="text" name="content" value="<%= @freepost.content%>"></p>
+
+    <input type = "submit" value="Send">
+  </form>
+
+  <br>
+  <h1><a href="/freeindex">Return to Index</a></h1>
+
+</body>
