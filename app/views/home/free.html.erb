@@ -7,13 +7,20 @@
       Content: <%= freepost.content %> <br>
       Time: <%= freepost.created_at %> <br>
 
-      <div style="border: 1px solid red; margin-bottom: 10px;">
-        <% freepost.freecomments.each do |fcomment| %>
+      <% freepost.freecomments.each do |fcomment| %>
+        <div style="border: 1px solid red; margin-bottom: 10px;">
           ID: <%= fcomment.username %> <br>
           Content: <%= fcomment.content %> <br>
-        <% end %>
+        </div>
+      <% end %>
 
-      </div>
+      <br>
+      <!--  -->
+        <a href = "/freelike/<%= freepost.id %>">LIKE (<%=freepost.freelikes.count%>)</a>
+        <br>
+        <a href = "/freedislike/<%= freepost.id %>">DISLIKE (<%=freepost.freedislikes.count%>)</a>
+        <br>
+      <!--  -->
 
       <form action= "/freecomment" method="POST">
         <input type = "hidden" name="freepost_id" value="<%= freepost.id%>">
@@ -21,6 +28,7 @@
         Content: <input type="text" name="content">
         <input type = "submit" value="Send">
       </form>
+
     </div>
   <% end %>
 
