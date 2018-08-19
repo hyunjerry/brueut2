@@ -35,9 +35,13 @@
     <input type = "submit" value="Send">
   </form>
 
-
   <br><br><br><br>
-  <h1><a href="/freeedit/<%= @freepost.id%>">Edit Post</a></h1>
-  <h1><a href="/freedestroy/<%= @freepost.id%>" data-confirm="Are you sure?" data-method = 'POST'>Delete Post</a></h1>
+  <% if current_user %>
+    <% if @current_user.uid == @freepost.username%>
+      <h1><a href="/freeedit/<%= @freepost.id%>">Edit Post</a></h1>
+      <h1><a href="/freedestroy/<%= @freepost.id%>" data-confirm="Are you sure?" data-method = 'POST'>Delete Post</a></h1>
+    <%end%>
+  <%end%>
+
   <h1><a href="/freeindex">Return to Index</a></h1>
 </body>

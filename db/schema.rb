@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2018_08_11_220759) do
   end
 
   create_table "freeposts", force: :cascade do |t|
-    t.integer "username"
+    t.string "username"
     t.string "title"
     t.text "content"
     t.datetime "created_at", null: false

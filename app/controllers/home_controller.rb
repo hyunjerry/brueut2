@@ -66,23 +66,23 @@ class HomeController < ApplicationController
   end
 
   def freeunlike #action for deleting existing like
-    @fl = Freelike.find(params[:freepost_id])
+    @fl = Freelike.where(:freepost_id => params[:freepost_id]).where(:user_id => current_user.id).take
     @fl.delete
     redirect_to "/freeshow/#{@fl.freepost_id}"
   end
 
   def freedislike #action for creating new dislike
-    fd = Freedislike.new
-    fd.user_id = current_user.id
-    fd.freepost_id = params[:freepost_id]
-    fd.save
-    redirect_to "/freeshow/#{fd.freepost_id}"
+    @fd = Freedislike.new
+    @fd.user_id = current_user.id
+    @fd.freepost_id = params[:freepost_id]
+    @fd.save
+    redirect_to "/freeshow/#{@fd.freepost_id}"
   end
 
   def freeundislike #action for deleting existing dislike
-    fd = Freedislike.freepost.find(params[:freepost_id])
-    fd.delete
-    redirect_to "/freeshow/#{fd.freepost_id}"
+    @fd = Freedislike.where(:freepost_id => params[:freepost_id]).where(:user_id => current_user.id).take
+    @fd.delete
+    redirect_to "/freeshow/#{@fd.freepost_id}"
   end
 
 end
